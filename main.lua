@@ -1,5 +1,5 @@
 function love.load()
-  love.physics.setMeter(64) --the height of a meter our worlds will be 64px
+  love.physics.setMeter(10) --the height of a meter our worlds will be 64px
   world = love.physics.newWorld(0, 0, true) --create a world for the bodies to exist in with horizontal gravity of 0 and vertical gravity of 9.81
 
   objects = {} -- table to hold all our physical objects
@@ -16,17 +16,6 @@ function love.load()
   objects.ball.shape = love.physics.newCircleShape(7) --the ball's shape has a radius of 20
   objects.ball.fixture = love.physics.newFixture(objects.ball.body, objects.ball.shape, 1) -- Attach fixture to body and give it a density of 1.
   objects.ball.fixture:setRestitution(0.9) --let the ball bounce
-
-  --let's create a couple blocks to play around with
-  objects.block1 = {}
-  objects.block1.body = love.physics.newBody(world, 200, 550, "dynamic")
-  objects.block1.shape = love.physics.newRectangleShape(0, 0, 50, 100)
-  objects.block1.fixture = love.physics.newFixture(objects.block1.body, objects.block1.shape, 5) -- A higher density gives it more mass.
-
-  objects.block2 = {}
-  objects.block2.body = love.physics.newBody(world, 200, 400, "dynamic")
-  objects.block2.shape = love.physics.newRectangleShape(0, 0, 100, 50)
-  objects.block2.fixture = love.physics.newFixture(objects.block2.body, objects.block2.shape, 2)
 
   --initial graphics setup
   love.graphics.setBackgroundColor(72, 160, 14) --set the background color to a nice blue
