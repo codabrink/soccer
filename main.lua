@@ -13,7 +13,7 @@ function love.load()
   objects.ground.fixture = love.physics.newFixture(objects.ground.body, objects.ground.shape); --attach shape to body
   
   --let's create a ball
-  objects.ball = ball:new(500, 300)
+  objects.ball = ball:new(world, 500, 300)
 
   --initial graphics setup
   love.graphics.setBackgroundColor(72, 160, 14) --set the background color to a nice blue
@@ -23,15 +23,12 @@ end
 
 function love.update(dt)
   world:update(dt) --this puts the world into motion
+  ball:update(dt)
   
   --here we are going to create some keyboard events
-  if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
-    objects.ball.body:applyForce(400, 0)
-  elseif love.keyboard.isDown("left") then --press the left arrow key to push the ball to the left
-    objects.ball.body:applyForce(-400, 0)
-  elseif love.keyboard.isDown("up") then --press the up arrow key to set the ball in the air
-    objects.ball.body:setPosition(650/2, 650/2)
-  end
+	if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
+		objects.ball:kick(0, 1)
+	end
 end
 
 function love.draw()
