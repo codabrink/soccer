@@ -1,3 +1,5 @@
+require 'classes/ball'
+
 function love.load()
   love.physics.setMeter(10) --the height of a meter our worlds will be 64px
   world = love.physics.newWorld(0, 0, true) --create a world for the bodies to exist in with horizontal gravity of 0 and vertical gravity of 9.81
@@ -11,11 +13,7 @@ function love.load()
   objects.ground.fixture = love.physics.newFixture(objects.ground.body, objects.ground.shape); --attach shape to body
   
   --let's create a ball
-  objects.ball = {}
-  objects.ball.body = love.physics.newBody(world, 650/2, 650/2, "dynamic") --place the body in the center of the world and make it dynamic, so it can move around
-  objects.ball.shape = love.physics.newCircleShape(7) --the ball's shape has a radius of 20
-  objects.ball.fixture = love.physics.newFixture(objects.ball.body, objects.ball.shape, 1) -- Attach fixture to body and give it a density of 1.
-  objects.ball.fixture:setRestitution(0.9) --let the ball bounce
+  objects.ball = ball:new(500, 300)
 
   --initial graphics setup
   love.graphics.setBackgroundColor(72, 160, 14) --set the background color to a nice blue
