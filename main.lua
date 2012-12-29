@@ -22,11 +22,17 @@ end
 
 
 function love.update(dt)
-  world:update(dt) --this puts the world into motion
-  ball:update(dt)
+	world:update(dt) --this puts the world into motion
+	ball:update(dt)
   
-  --here we are going to create some keyboard events
-	if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right
+	--here we are going to create some keyboard events
+	if love.keyboard.isDown("right") then
+		objects.ball:kick(90, 1)
+	elseif love.keyboard.isDown("left") then
+		objects.ball:kick(270, 1)
+	elseif love.keyboard.isDown("down") then
+		objects.ball:kick(180, 1)
+	elseif love.keyboard.isDown("up") then
 		objects.ball:kick(0, 1)
 	end
 end

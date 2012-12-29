@@ -13,6 +13,7 @@ function ball:update(dt)
 
 end
 
-function ball:kick(angleD, magnitude)
-	self.body:applyLinearImpulse(magnitude, 0)
+function ball:kick(angle, magnitude)
+	if angle == 0 then angle=360 end
+	self.body:applyLinearImpulse(math.sin(math.pi*(angle/180)), -math.cos(math.pi*(angle/180))) --0 degrees is up, 90 right, etc
 end
