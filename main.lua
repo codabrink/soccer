@@ -1,16 +1,38 @@
 require 'classes/ball'
 
+walls=true
+
 function love.load()
   love.physics.setMeter(10) --the height of a meter our worlds will be 64px
   world = love.physics.newWorld(0, 0, true) --create a world for the bodies to exist in with horizontal gravity of 0 and vertical gravity of 9.81
 
   objects = {} -- table to hold all our physical objects
   
-  --let's create the ground
-  objects.ground = {}
-  objects.ground.body = love.physics.newBody(world, 650/2, 650-50/2) --remember, the shape (the rectangle we create next) anchors to the body from its center, so we have to move it to (650/2, 650-50/2)
-  objects.ground.shape = love.physics.newRectangleShape(650, 50) --make a rectangle with a width of 650 and a height of 50
-  objects.ground.fixture = love.physics.newFixture(objects.ground.body, objects.ground.shape); --attach shape to body
+	if(walls) then 
+		--let's create the ground
+		objects.walls = {}
+
+		objects.walls.top = {}
+		objects.walls.top.body = love.physics.newBody(world, 500, 0)
+		objects.walls.top.shape = love.physics.newRectangleShape(1000, 1)
+		objects.walls.top.fixture = love.physics.newFixture(objects.walls.top.body, objects.walls.top.shape)
+
+		objects.walls.right = {}
+		objects.walls.right.body = love.physics.newBody(world, 1000, 300)
+		objects.walls.right.shape = love.physics.newRectangleShape(1, 600)
+		objects.walls.right.fixture = love.physics.newFixture(objects.walls.right.body, objects.walls.right.shape)
+
+		objects.walls.bottom = {}
+		objects.walls.bottom.body = love.physics.newBody(world, 500, 600)
+		objects.walls.bottom.shape = love.physics.newRectangleShape(1000, 1)
+		objects.walls.bottom.fixture = love.physics.newFixture(objects.walls.bottom.body, objects.walls.bottom.shape)
+
+		objects.walls.left = {}
+		objects.walls.left.body = love.physics.newBody(world, 0, 300)
+		objects.walls.left.shape = love.physics.newRectangleShape(1, 600)
+		objects.walls.left.fixture = love.physics.newFixture(objects.walls.left.body, objects.walls.left.shape)
+
+	end
   
   --let's create a ball
   objects.ball = ball:new(world, 500, 300)
