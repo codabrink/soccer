@@ -45,6 +45,11 @@ function love.load()
   love.graphics.setMode(1000, 560, false, true, 0) --set the window dimensions to 650 by 650
 end
 
+function love.keypressed(key)   -- we do not need the unicode, so we can leave it out
+   if key == "q" then
+      love.event.push("quit")   -- actually causes the app to quit
+   end
+end
 
 function love.update(dt)
 	world:update(dt) --this puts the world into motion
