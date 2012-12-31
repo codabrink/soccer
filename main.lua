@@ -1,6 +1,7 @@
 require 'classes/ball'
 
 walls=true
+useImages=false
 bg=love.graphics.newImage("field.png");
 ballImage=love.graphics.newImage("ball.png");
 
@@ -40,7 +41,7 @@ function love.load()
   objects.ball = ball:new(world, 500, 280, ballImage)
 
   --initial graphics setup
-  --love.graphics.setBackgroundColor(72, 160, 14) --set the background color to a nice blue
+  if(not useImages) then love.graphics.setBackgroundColor(72, 160, 14) end--set the background color to a nice blue
   love.graphics.setMode(1000, 560, false, true, 0) --set the window dimensions to 650 by 650
 end
 
@@ -62,13 +63,18 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.setColor(255,255,255,128)
-	love.graphics.draw(bg)
-	love.graphics.setColor(255,255,255,255)
-	if(objects.ball.image) then love.graphics.draw(objects.ball.image, objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.body:getAngle(),  1, 1, objects.ball.image:getWidth()/2, objects.ball.image:getHeight()/2)
+	if(useImages) then
+		love.graphics.setColor(255,255,255,128)
+		love.graphics.draw(bg)
+		love.graphics.setColor(255,255,255,255)
+		if(objects.ball.image) then love.graphics.draw(objects.ball.image, objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.body:getAngle(),  1, 1, objects.ball.image:getWidth()/2, objects.ball.image:getHeight()/2)
+		else
+			love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
+			love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
+		end
 	else
 		love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
-		ove.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
+		love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
 	end
   
 end
