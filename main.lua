@@ -63,18 +63,7 @@ function love.update(dt)
 end
 
 function love.draw()
-	if(useImages) then
-		love.graphics.setColor(255,255,255,128)
-		love.graphics.draw(bg)
-		love.graphics.setColor(255,255,255,255)
-		if(objects.ball.image) then love.graphics.draw(objects.ball.image, objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.body:getAngle(),  1, 1, objects.ball.image:getWidth()/2, objects.ball.image:getHeight()/2)
-		else
-			love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
-			love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
-		end
-	else
-		love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
-		love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
-	end
-  
+   love.graphics.setColor(255,255,255,128)
+   love.graphics.draw(bg)
+   ball:draw()
 end
