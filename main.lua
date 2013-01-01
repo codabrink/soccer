@@ -66,7 +66,6 @@ function love.draw()
 end
 
 function loadTeam(team)
-   printme = team
    teams[team] = {}
    teamDir = "teams/"..team
    files = love.filesystem.enumerate(teamDir)
@@ -74,6 +73,6 @@ function loadTeam(team)
       assert(loadstring('require "'..teamDir.."/"..string.sub(file,1,-5)..'"'))()
    end
    for i=1,1 do
-      teams[team][i] = assert(loadstring(team..i..":new(world, teams[team])"))
+      teams[team][i] = assert(loadstring("return "..team..i..":new(world, teams[team])")())
    end
 end
