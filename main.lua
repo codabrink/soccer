@@ -7,10 +7,6 @@ teams = {}
 
 printme = ''
 
-function love.conf(t)
-   t.console = true
-end
-
 function love.load()
   love.physics.setMeter(10)
   world = love.physics.newWorld(0, 0, true)
