@@ -5,6 +5,12 @@ objects = {}
 bg = love.graphics.newImage("res/field.png");
 teams = {}
 
+printme = ''
+
+function love.conf(t)
+   t.console = true
+end
+
 function love.load()
   love.physics.setMeter(10)
   world = love.physics.newWorld(0, 0, true)
@@ -14,9 +20,9 @@ function love.load()
   objects.goal3 = goal:new(world, 500, 60, 90, objects.ball)
   objects.goal4 = goal:new(world, 500, 500, 270, objects.ball)
 
-  loadTeam("coda")
+   loadTeam("coda")
 
-  love.graphics.setMode(1000, 560, false, true, 0)
+   love.graphics.setMode(1000, 560, false, true, 0)
 end
 
 function love.keypressed(key)
@@ -50,20 +56,24 @@ function love.draw()
    love.graphics.draw(bg)
    objects.ball:draw()
    objects.goal1:draw()
+
+   teams["coda"][1]:draw()
+
+   love.graphics.print(printme, 100, 100)
    objects.goal2:draw()
    objects.goal3:draw()
    objects.goal4:draw()
 end
 
 function loadTeam(team)
+   printme = team
    teams[team] = {}
    teamDir = "teams/"..team
    files = love.filesystem.enumerate(teamDir)
    for k, file in ipairs(files) do
-      loadstring("require "..file)
+      assert(loadstring('require "'..teamDir.."/"..string.sub(file,1,-5)..'"'))()
    end
    for i=1,1 do
-      local s = team..i..":init(world, teams[team])"
-      teams[team][i] = loadstring(s)
+      teams[team][i] = assert(loadstring(team..i..":new(world, teams[team])"))
    end
 end
