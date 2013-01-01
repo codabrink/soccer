@@ -4,14 +4,14 @@ require 'classes/goal'
 objects = {}
 bg = love.graphics.newImage("res/field.png");
 teams = {}
-teams[0] = {}
-teams[1] = {}
 
 function love.load()
   love.physics.setMeter(10)
   world = love.physics.newWorld(0, 0, true)
   objects.ball = ball:new(world, 500, 280, ballImage)
   objects.goal1 = goal:new(world, 100, 100)
+
+  loadTeam("coda")
 
   love.graphics.setMode(1000, 560, false, true, 0)
 end
@@ -43,4 +43,17 @@ function love.draw()
    love.graphics.draw(bg)
    objects.ball:draw()
    objects.goal1:draw()
+end
+
+function loadTeam(team)
+   teams[team] = {}
+   teamDir = "teams/"..team
+   files = love.filesystem.enumerate(teamDir)
+   for k, file in ipairs(files) do
+      loadstring("require "..file)
+   end
+   for i=1,1 do
+      local s = team..i..":init(world, teams[team])"
+      teams[team][i] = loadstring(s)
+   end
 end

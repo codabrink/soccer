@@ -1,16 +1,16 @@
 require "lib/class"
 require "teams/player"
-local p = class:new()
+local coda1 = class:new()
 
-function p:init(world, team, x, y)
+function coda1:init(world, team, x, y)
    createPlayer(self, world, team, x, y)
 end
 
-function p:update(dt)
+function coda1:update(dt)
    
 end
 
-function p:draw()
+function coda1:draw()
    love.graphics.setColor(255,0,0,255)
    love.graphics.circle("fill", self.body:getX(), self.body:getY(), self.shape:getRadius())
 end
