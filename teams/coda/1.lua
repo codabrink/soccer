@@ -20,5 +20,5 @@ function coda1:update(dt)
 end
 
 function samePolarity(a,b)
-   if a > 0 and b > 0 or a < 0 and b < 0 then return true else return false end
+   return a > 0 and b > 0 or a < 0 and b < 0
 end
