@@ -1,6 +1,6 @@
 require "lib/class"
 require "teams/player"
-local coda2 = class:new()
+class "coda2" {}
 
 function coda2:init(world, team)
    createPlayer(self, world, team)

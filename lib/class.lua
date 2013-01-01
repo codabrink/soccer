@@ -1,3 +1,34 @@
+function class(name)
+  local newclass={}
+  _G[name]=newclass
+  newclass.__members={}
+  function newclass.define(class,members)
+    for k,v in pairs(members) do
+      class.__members[k]=v
+    end
+  end
+  function newclass.extends(class,base)
+    class.super=base
+    for k,v in pairs(base.__members) do
+      class.__members[k]=v
+    end
+    return setmetatable(class,{__index=base,__call=class.define})
+  end
+  function newclass.new(class,...)
+    local object={}
+    for k,v in pairs(class.__members) do
+      object[k]=v
+    end
+    setmetatable(object,{__index=class})
+    if object.init then
+      object:init(...)
+    end
+    return object
+  end
+  return setmetatable(newclass,{__call=newclass.define})
+end
+
+
 --[[
 Copyright (c) 2009 Bart Bes
 
@@ -21,7 +52,7 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-]]
+
 
 __HAS_SECS_COMPATIBLE_CLASSES__ = true
 
@@ -42,3 +73,4 @@ function class:new(...)
     end
     return c
 end 
+]]

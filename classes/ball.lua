@@ -1,5 +1,5 @@
 require "lib/class"
-ball = class:new()
+class "ball" {}
 
 function ball:init(world, x, y)
    self.body = love.physics.newBody(world, x, y, "dynamic")
@@ -31,3 +31,4 @@ end
 function ball:getPos() return self.body:getX(), self.body:getY() end
 function ball:getX() return self.body:getX() end
 function ball:getY() return self.body:getY() end
+function ball:getLinearVelocity() return self.body:getLinearVelocity() end

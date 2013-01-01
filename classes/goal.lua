@@ -1,5 +1,5 @@
 require "lib/class"
-goal = class:new()
+class "goal" {}
 
 local image=love.graphics.newImage("res/goal.png")
 local font=love.graphics.newFont(14);
