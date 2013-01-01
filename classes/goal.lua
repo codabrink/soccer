@@ -12,5 +12,6 @@ end
 
 function goal:draw()
 	love.graphics.setColor(255,255,255,255)
-	love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
+	--love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
+	love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
 end
