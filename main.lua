@@ -57,7 +57,12 @@ function love.draw()
    objects.ball:draw()
    objects.goal1:draw()
 
-   teams["coda"][1]:draw()
+   for k, team in pairs(teams) do
+      for k, player in ipairs(team) do
+	 player:draw()
+      end
+   end
+
 
    love.graphics.print(printme, 100, 100)
    objects.goal2:draw()
