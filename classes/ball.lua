@@ -19,8 +19,8 @@ function ball:update(dt)
 end
 
 function ball:kick(angle, magnitude)
-   if angle == 0 then angle = 360 end
-   self.body:applyForce(math.sin(math.pi*(angle/180))*magnitude*10, -math.cos(math.pi*(angle/180))*magnitude*10) --0 degrees is up, 90 right, etc
+   angle = (angle == 0) and 360 or angle
+   self.body:applyForce(math.sin(math.pi*(angle/180))*magnitude*10, -math.cos(math.pi*(angle/180))*magnitude*10)
 end
 
 function ball:draw()
