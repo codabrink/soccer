@@ -1,10 +1,9 @@
 require "lib/class"
+require "teams/player"
 local p = class:new()
 
 function p:init(world, team, x, y)
-   self.body = love.physics.newBody(world, x, y, "dynamic")
-   self.shape =love.physics.newCircleShape(8)
-   self.fixture = love.physics.newFixture(self.body, self.shape, 1)
+   createPlayer(self, world, team, x, y)
 end
 
 function p:update(dt)
