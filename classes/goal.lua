@@ -25,7 +25,7 @@ function goal:update(dt)
 	ballX, ballY=self.ball:getPos()
 	upperX, upperY=self.body:getWorldPoint(14, 40)
 	lowerX, lowerY=self.body:getWorldPoint(-14, -40)
-	if(ballX>lowerX and ballX<upperX and ballY>lowerY and ballY>lowerY) then
+	if(ballX>lowerX and ballX<upperX and ballY>lowerY and ballY<upperY) then
 		self.drawScore=true
 	else self.drawScore=false
 	end
