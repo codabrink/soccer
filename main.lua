@@ -11,7 +11,8 @@ function love.load()
   love.physics.setMeter(10)
   world = love.physics.newWorld(0, 0, true)
   objects.ball = ball:new(world, 500, 280, ballImage)
-  objects.goal1 = goal:new(world, 100, 100)
+  objects.goal1 = goal:new(world, 40, 280, 0)
+  objects.goal2 = goal:new(world, 960, 280, 180)
 
   love.graphics.setMode(1000, 560, false, true, 0)
 end
@@ -43,4 +44,5 @@ function love.draw()
    love.graphics.draw(bg)
    objects.ball:draw()
    objects.goal1:draw()
+   objects.goal2:draw()
 end
