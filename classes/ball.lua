@@ -6,13 +6,13 @@ function ball:init(world, x, y, image)
    self.shape = love.physics.newCircleShape(4) --the ball is 40 cm
    self.fixture = love.physics.newFixture(self.body, self.shape, 1) -- Attach fixture to body and give it a density of 1.
    self.fixture:setRestitution(0.9) --let the ball bounce
-   self.body:setLinearDamping(2);
-   
    if(image) then self.image=image end
 end
 
 function ball:update(dt)
-
+	randomChange=math.random(1,10)
+	randomChange=randomChange/5
+	self.body:setLinearDamping(1.9+randomChange)
 end
 
 function ball:kick(angle, magnitude)

@@ -53,7 +53,7 @@ end
 
 function love.update(dt)
 	world:update(dt) --this puts the world into motion
-	ball:update(dt)
+	objects.ball:update(dt)
   
 	--here we are going to create some keyboard events
 	if love.keyboard.isDown("right") then
