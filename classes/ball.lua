@@ -28,3 +28,7 @@ function ball:draw()
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
 end
+
+function ball:getPos()
+	return self.body:getX(), self.body:getY()
+end

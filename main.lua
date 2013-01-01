@@ -12,11 +12,11 @@ function love.conf(t)
 end
 
 function love.load()
-   love.physics.setMeter(10)
-   world = love.physics.newWorld(0, 0, true)
-   objects.ball = ball:new(world, 500, 280, ballImage)
-   objects.goal1 = goal:new(world, 40, 280, 0)
-   objects.goal2 = goal:new(world, 960, 280, 180)
+  love.physics.setMeter(10)
+  world = love.physics.newWorld(0, 0, true)
+  objects.ball = ball:new(world, 500, 280, ballImage)
+  objects.goal1 = goal:new(world, 40, 280, 0, objects.ball)
+  objects.goal2 = goal:new(world, 960, 280, 180, objects.ball)
 
    loadTeam("coda")
 
@@ -30,18 +30,20 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
-   world:update(dt)
-   objects.ball:update(dt)
-   
-   if love.keyboard.isDown("right") then
-      objects.ball:kick(90, 75)
-   elseif love.keyboard.isDown("left") then
-      objects.ball:kick(270, 75)
-   elseif love.keyboard.isDown("down") then
-      objects.ball:kick(180, 75)
-   elseif love.keyboard.isDown("up") then
-      objects.ball:kick(0, 75)
-   end
+	world:update(dt)
+	objects.ball:update(dt)
+	objects.goal1:update()
+	objects.goal2:update()
+  
+	if love.keyboard.isDown("right") then
+		objects.ball:kick(90, 75)
+	elseif love.keyboard.isDown("left") then
+		objects.ball:kick(270, 75)
+	elseif love.keyboard.isDown("down") then
+		objects.ball:kick(180, 75)
+	elseif love.keyboard.isDown("up") then
+		objects.ball:kick(0, 75)
+	end
 end
 
 function love.draw()
@@ -54,6 +56,7 @@ function love.draw()
    teams["coda"][1]:draw()
 
    love.graphics.print(printme, 100, 100)
+   objects.goal2:draw()
 end
 
 function loadTeam(team)
