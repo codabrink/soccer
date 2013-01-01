@@ -1,5 +1,5 @@
 require "lib/class"
-ball = class:new()
+local ball = class:new()
 
 function ball:init(world, x, y, image)
    self.body = love.physics.newBody(world, x, y, "dynamic")
@@ -25,5 +25,4 @@ end
 function ball:draw()
    love.graphics.setColor(255,255,255,255)
    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
-   
 end
