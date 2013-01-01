@@ -11,6 +11,8 @@ function love.load()
   objects.ball = ball:new(world, 500, 280, ballImage)
   objects.goal1 = goal:new(world, 40, 280, 0, objects.ball)
   objects.goal2 = goal:new(world, 960, 280, 180, objects.ball)
+  objects.goal3 = goal:new(world, 500, 60, 90, objects.ball)
+  objects.goal4 = goal:new(world, 500, 500, 270, objects.ball)
 
   loadTeam("coda")
 
@@ -26,8 +28,10 @@ end
 function love.update(dt)
 	world:update(dt)
 	objects.ball:update(dt)
-	objects.goal1:update()
-	objects.goal2:update()
+	objects.goal1:update(dt)
+	objects.goal2:update(dt)
+	objects.goal3:update(dt)
+	objects.goal4:update(dt)
   
 	if love.keyboard.isDown("right") then
 		objects.ball:kick(90, 75)
@@ -47,6 +51,8 @@ function love.draw()
    objects.ball:draw()
    objects.goal1:draw()
    objects.goal2:draw()
+   objects.goal3:draw()
+   objects.goal4:draw()
 end
 
 function loadTeam(team)

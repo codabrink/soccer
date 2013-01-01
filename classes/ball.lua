@@ -9,6 +9,7 @@ function ball:init(world, x, y)
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
    self.fixture:setRestitution(0.9)
    self.body:setLinearDamping(2)
+   self.body:setAngularDamping(1.5)
 
    if(image) then self.image=image end
 end

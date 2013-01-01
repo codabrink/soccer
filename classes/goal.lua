@@ -7,6 +7,7 @@ local font=love.graphics.newFont(14);
 function goal:init(world, x, y, rotation, ball)
 	self.ready=true
 	self.ball=ball
+	self.timeLeft=0
    self.body = love.physics.newBody(world, x, y)
    --0,0, 0,80, 80,28, 80,27, 1,80, 1,1, 28,1, 28,0)
    self.shape1 = love.physics.newEdgeShape(-14,-40, -14,40)
@@ -22,19 +23,26 @@ function goal:init(world, x, y, rotation, ball)
 end
 
 function goal:update(dt)
+	self:checkBall(dt);
+	if(self.timeLeft>0) then
+		self.timeLeft=self.timeLeft-dt
+		self.drawScore=true
+	else
+		self.drawScore=false
+		self.ready=true
+	end
+end
+
+function goal:checkBall(dt)
 	ballX, ballY=self.ball:getPos()
 	upperX, upperY=self.body:getWorldPoint(14, 40)
 	lowerX, lowerY=self.body:getWorldPoint(-14, -40)
 	if(upperX<lowerX) then upperX,lowerX=lowerX,upperX end
 	if(upperY<lowerY) then upperY,lowerY=lowerY,upperY end
 	if(ballX>lowerX and ballX<upperX and ballY>lowerY and ballY<upperY) then
-		self.drawScore=true
-	else self.drawScore=false
+		self.ready=false
+		self.timeLeft=3
 	end
-end
-
-function goal:checkBall()
-	
 end
 
 function goal:draw()
