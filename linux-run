@@ -1,0 +1,4 @@
+#!/bin/bash
+zip -r soccer.love * -x *.bat -x linux-run -x *.git* -x *.love
+love soccer.love
+rm soccer.love
