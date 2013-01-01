@@ -23,12 +23,7 @@ function ball:kick(angle, magnitude)
 end
 
 function ball:draw()
-   if(self.image) then
-      love.graphics.setColor(255,255,255,255)
-      love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
-   else
-      love.graphics.setColor(193, 47, 14) --set the drawing color to red for the ball
-      love.graphics.circle("fill", self.body:getX(), self.body:getY(), self.shape:getRadius())
-   end
+   love.graphics.setColor(255,255,255,255)
+   love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
    
 end

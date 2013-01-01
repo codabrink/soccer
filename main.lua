@@ -71,5 +71,5 @@ function love.draw()
    --draw dat field
    love.graphics.setColor(255,255,255,128)
    love.graphics.draw(bg)
-   ball:draw()
+   objects.ball:draw()
 end
