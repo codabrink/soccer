@@ -9,7 +9,8 @@ function love.load()
   love.physics.setMeter(10)
   world = love.physics.newWorld(0, 0, true)
   objects.ball = ball:new(world, 500, 280, ballImage)
-  objects.goal1 = goal:new(world, 100, 100)
+  objects.goal1 = goal:new(world, 40, 280, 0)
+  objects.goal2 = goal:new(world, 960, 280, 180)
 
   loadTeam("coda")
 
