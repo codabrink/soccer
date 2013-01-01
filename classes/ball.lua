@@ -1,7 +1,9 @@
 require "lib/class"
-local ball = class:new()
+ball = class:new()
 
-function ball:init(world, x, y, image)
+local image=love.graphics.newImage("res/ball.png")
+
+function ball:init(world, x, y)
    self.body = love.physics.newBody(world, x, y, "dynamic")
    self.shape = love.physics.newCircleShape(4) --the ball is 40 cm
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
@@ -23,6 +25,6 @@ function ball:kick(angle, magnitude)
 end
 
 function ball:draw()
-   love.graphics.setColor(255,255,255,255)
-   love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
+	love.graphics.setColor(255,255,255,255)
+	love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)
 end

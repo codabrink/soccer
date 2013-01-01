@@ -1,9 +1,8 @@
 require 'classes/ball'
+require 'classes/goal'
 
 walls=true
-useImages=false
-bg=love.graphics.newImage("field.png");
-ballImage=love.graphics.newImage("ball.png");
+bg=love.graphics.newImage("res/field.png")
 
 function love.load()
   love.physics.setMeter(10) --the height of a meter our worlds will be 64px
@@ -38,7 +37,8 @@ function love.load()
 	end
   
   --let's create a ball
-  objects.ball = ball:new(world, 500, 280, ballImage)
+  objects.ball = ball:new(world, 500, 280)
+  objects.goal1 = goal:new(world, 100, 100)
 
   --initial graphics setup
   if(not useImages) then love.graphics.setBackgroundColor(72, 160, 14) end--set the background color to a nice blue
@@ -72,4 +72,5 @@ function love.draw()
    love.graphics.setColor(255,255,255,128)
    love.graphics.draw(bg)
    objects.ball:draw()
+   objects.goal1:draw()
 end
