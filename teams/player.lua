@@ -1,4 +1,6 @@
-class "player"
+class "player" {
+   speedLimit = 100
+}
 
 function player:createPlayer(team, x, y)
    self.body = love.physics.newBody(world, x, y, "dynamic")
@@ -28,4 +30,14 @@ end
 function player:moveTowardsAngle(a,m)
    a = (a == 0) and 360 or a
    self.body:applyForce(math.sin(math.pi*(angle/180))*m*10, -math.cos(math.pi*(angle/180))*m*10)
+end
+
+function player:govern(dt)
+   -- govern speed
+   local x, y = self.body:getLinearVelocity()
+   local h = math.sqrt(x*x+y*y)
+   if h > self.speedLimit then
+      local reduce = self.speedLimit / h
+      self.body:setLinearVelocity(x*reduce, y*reduce)
+   end
 end

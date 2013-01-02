@@ -38,6 +38,7 @@ function love.update(dt)
 	for k, team in pairs(teams) do
 	   for k, player in ipairs(team) do
 	      player:update()
+	      player:govern()
 	   end
 	end
 
