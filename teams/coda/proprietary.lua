@@ -1,0 +1,1 @@
+class "proprietary" : extends (player)
