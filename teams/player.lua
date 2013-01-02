@@ -42,3 +42,10 @@ function player:govern(dt)
       self.body:setLinearVelocity(x*reduce, y*reduce)
    end
 end
+
+
+-- misc functions
+
+function samePolarity(a,b)
+   return a > 0 and b > 0 or a < 0 and b < 0
+end

@@ -1,6 +1,7 @@
 require "lib/class"
 require "teams/player"
-class "coda1" : extends(player) {
+require "teams/coda/proprietary"
+class "coda1" : extends(proprietary) {
    sd = 0
 }
 
@@ -19,6 +20,3 @@ function coda1:update(dt)
    self.body:applyForce(fx,fy)
 end
 
-function samePolarity(a,b)
-   return a > 0 and b > 0 or a < 0 and b < 0
-end
