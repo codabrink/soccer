@@ -1,11 +1,12 @@
 class "player" {
-   speedLimit = 100
+   speedLimit = 110
 }
 
 function player:createPlayer(team, x, y)
    self.body = love.physics.newBody(world, x, y, "dynamic")
    self.shape = love.physics.newCircleShape(8)
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
+   self.body:setMass(.6)
    self.team = team
 end
 

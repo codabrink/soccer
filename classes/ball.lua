@@ -8,6 +8,7 @@ function ball:init(world, x, y)
    self.fixture:setRestitution(0.9)
    self.body:setLinearDamping(2)
    self.body:setAngularDamping(1.5)
+   self.body:setMass(.05)
 
    self.image = love.graphics.newImage("res/ball.png")
 end

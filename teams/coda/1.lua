@@ -1,7 +1,7 @@
 require "lib/class"
 require "teams/player"
 class "coda1" : extends(player) {
-   sd = 40
+   sd = 0
 }
 
 function coda1:init(team)
