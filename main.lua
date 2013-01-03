@@ -8,14 +8,14 @@ teams = {}
 printme = ''
 
 function love.load()
-  love.physics.setMeter(10)
-  world = love.physics.newWorld(0, 0, true)
-  objects.ball = ball:new(world, 500, 280, ballImage)
-  objects.goals = {}
-  objects.goals.goal1 = goal:new(world, 40, 280, 0, objects.ball)
-  objects.goals.goal2 = goal:new(world, 960, 280, 180, objects.ball)
-  objects.goals.goal3 = goal:new(world, 500, 60, 90, objects.ball)
-  objects.goals.goal4 = goal:new(world, 500, 500, 270, objects.ball)
+   love.physics.setMeter(10)
+   world = love.physics.newWorld(0, 0, true)
+   objects.ball = ball:new(world, 500, 280, ballImage)
+   objects.goals = {}
+   objects.goals.goal1 = goal:new(world, 40, 280, 0, objects.ball)
+   objects.goals.goal2 = goal:new(world, 960, 280, 180, objects.ball)
+   objects.goals.goal3 = goal:new(world, 500, 60, 90, objects.ball)
+   objects.goals.goal4 = goal:new(world, 500, 500, 270, objects.ball)
 
    loadTeam("coda")
 
@@ -37,18 +37,18 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
-	world:update(dt)
-	objects.ball:update(dt)
-	for k, goal in pairs(objects.goals) do
-	   goal:update(dt)
-	end
-	
-	for k, team in pairs(teams) do
-	   for k, player in ipairs(team) do
-	      player:update()
-	      player:govern()
-	   end
-	end
+   world:update(dt)
+   objects.ball:update(dt)
+   for k, team in pairs(teams) do
+      for k, player in ipairs(team) do
+	 player:update()
+	 player:govern()
+      end
+   end
+   
+   for k, goal in pairs(objects.goals) do
+      goal:update(dt)
+   end
 end
 
 function love.draw()

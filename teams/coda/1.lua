@@ -10,7 +10,7 @@ function coda1:init(team)
 end
 
 function coda1:update(dt)
-   dx, dy = self:getDiffs()
+   --[[dx, dy = self:getDiffs()
    hx, hy = self.body:getLinearVelocity()
    fy = dy
    fx = dx
@@ -18,5 +18,7 @@ function coda1:update(dt)
    if math.abs(dx) < self.sd and samePolarity(hx,fx) then fx = -fx * 4 end
    printme = fx
    self.body:applyForce(fx,fy)
+      ]]
+      self:moveTowardsBall(.1)
 end
 
