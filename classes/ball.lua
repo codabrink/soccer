@@ -1,5 +1,8 @@
 require "lib/class"
-class "ball" {}
+class "ball" {
+   kickInterval = 3,
+   kicked = 0
+	     }
 
 function ball:init(world, x, y)
    self.body = love.physics.newBody(world, x, y, "dynamic")
@@ -17,20 +20,32 @@ function ball:update(dt)
    randomChange = math.random(1,10)
    randomChange = randomChange/5
    self.body:setLinearDamping(1.9+randomChange)
+   if self:outsideBounds() then
+      resetPlayers()
+   end
+end
+
+function ball:outsideBounds()
+   x, y = self.body:getPosition()
+   return x > width or x < 0 or y > height or y < 0
 end
 
 function ball:kick(angle, magnitude)
+   if love.timer.getTime() < self.kicked + self.kickInterval then return end
+   self.kicked = love.timer.getTime()
    angle = (angle == 0) and 360 or angle
-   self.body:applyForce(math.sin(math.pi*(angle/180))*magnitude*10, -math.cos(math.pi*(angle/180))*magnitude*10)
+   self.body:applyLinearImpulse(math.sin(math.pi*(angle/180))*magnitude, -math.cos(math.pi*(angle/180))*magnitude)
 end
 
 function ball:kickTowardsGoal(goal, m)
+   if love.timer.getTime() < self.kicked + self.kickInterval then return end
+   self.kicked = love.timer.getTime()
    gx, gy = goal:getCenter()
    sx, sy = self.body:getPosition()
    dx = gx - sx
    dy = gy - sy
    ratio = m / math.sqrt(dx*dx+dy*dy)
-   self.body:applyForce(dx*ratio, dy*ratio)
+   self.body:applyLinearImpulse(dx*ratio, dy*ratio)
 end
 
 function ball:draw()

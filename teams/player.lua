@@ -1,7 +1,7 @@
 class "player" {
    speedLimit = 130,
-   kickDistance = 30,
-   kickMagnitude = 200
+   kickDistance = 17,
+   kickMagnitude = 100
 	       }
 
 function player:createPlayer(team, x, y)

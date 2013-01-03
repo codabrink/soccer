@@ -1,5 +1,6 @@
 require 'classes/ball'
 require 'classes/goal'
+require 'lib/util'
 
 objects = {}
 bg = love.graphics.newImage("res/field.png");
@@ -14,7 +15,7 @@ printme = ''
 function love.load()
    love.physics.setMeter(10)
    world = love.physics.newWorld(0, 0, true)
-   objects.ball = ball:new(world, 500, 280, ballImage)
+   objects.ball = ball:new(world, width / 2, height / 2, ballImage)
    objects.goals = {}
 
    loadTeam("coda")
@@ -38,6 +39,7 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
+   printme = love.timer.getTime()
    world:update(dt)
    objects.ball:update(dt)
    for k, team in pairs(teams) do
@@ -75,7 +77,7 @@ function loadTeam(team)
    for k, file in ipairs(files) do
       assert(loadstring('require "'..teamDir.."/"..string.sub(file,1,-5)..'"'))()
    end
-   for i=1,1 do
+   for i=1,2 do
       y = math.random(height)
       x = (numTeams == 1) and math.random(width / 2) + width / 2 or math.random(width / 2)
 	  z = teams[team]
@@ -110,4 +112,7 @@ function resetPlayers()
 	 if(player.reset) then player:reset() end
       end
    end
+
+   objects.ball.body:setPosition(width / 2, height / 2)
+   objects.ball.body:setLinearVelocity(0,0)
 end
