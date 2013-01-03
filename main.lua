@@ -4,6 +4,7 @@ require 'classes/goal'
 objects = {}
 bg = love.graphics.newImage("res/field.png");
 teams = {}
+numTeams=0
 
 printme = ''
 
@@ -61,6 +62,7 @@ function love.draw()
 end
 
 function loadTeam(team)
+	numTeams=numTeams+1
    teams[team] = {}
    teamDir = "teams/"..team
    files = love.filesystem.enumerate(teamDir)
@@ -70,7 +72,7 @@ function loadTeam(team)
    for i=1,(table.getn(files)-1) do
       teams[team][i] = assert(loadstring("return "..team..i..":new(teams[team])")())
    end
-   if(table.getn(teams)==1) then x,y,r=960,280,180
+   if(numTeams==1) then x,y,r=960,280,180
    else x,y,r=40,280,0 end
-	teams[team].goal = goal:new(world, 40, 280, 0, objects.ball, 1, {255, 50, 50, 255})
+	teams[team].goal = goal:new(world, x, y, r, objects.ball, numTeams, teams[team][1].color)
 end
