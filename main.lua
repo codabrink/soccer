@@ -13,7 +13,7 @@ function love.load()
   objects.ball = ball:new(world, 500, 280, ballImage)
   objects.goals = {}
 
-
+   loadTeam("coda")
    loadTeam("mike")
 
    love.graphics.setMode(1000, 560, false, true, 0)

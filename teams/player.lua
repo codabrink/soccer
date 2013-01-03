@@ -11,7 +11,7 @@ function player:createPlayer(team, x, y)
 end
 
 function player:draw()
-   love.graphics.setColor(255,0,0,255)
+   love.graphics.setColor(self.color[1],self.color[2],self.color[3],self.color[4])
    love.graphics.circle("fill", self.body:getX(), self.body:getY(), self.shape:getRadius())
 end
 

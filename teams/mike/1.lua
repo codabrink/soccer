@@ -1,7 +1,7 @@
 require "lib/class"
 require "teams/player"
-require "teams/mike/proprietary"
-class "mike1" : extends(proprietary)
+require "teams/mike/pmike"
+class "mike1" : extends(pmike)
 
 function mike1:init(team)
    self:createPlayer(team, 110, 100)

@@ -1,6 +1,7 @@
 require "lib/class"
 require "teams/player"
-class "coda2" : extends(player)
+require "teams/coda/pcoda"
+class "coda2" : extends(pcoda)
 
 function coda2:init(team)
    self:createPlayer(team, 150, 100)
