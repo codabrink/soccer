@@ -9,7 +9,7 @@ function ball:init(world, x, y)
    self.shape = love.physics.newCircleShape(4) --the ball is 40 cm
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
    self.fixture:setRestitution(0.9)
-   self.body:setLinearDamping(2)
+   self.body:setLinearDamping(.5)
    self.body:setAngularDamping(1.5)
    self.body:setMass(.05)
 
@@ -19,7 +19,6 @@ end
 function ball:update(dt)
    randomChange = math.random(1,10)
    randomChange = randomChange/5
-   self.body:setLinearDamping(1.9+randomChange)
    if self:outsideBounds() then
       resetPlayers()
    end
@@ -30,16 +29,22 @@ function ball:outsideBounds()
    return x > width or x < 0 or y > height or y < 0
 end
 
-function ball:kick(angle, magnitude)
+function ball:kick(player, angle, magnitude)
    if love.timer.getTime() < self.kicked + self.kickInterval then return end
+
    self.kicked = love.timer.getTime()
+   self.posession = player.team
+
    angle = (angle == 0) and 360 or angle
    self.body:applyLinearImpulse(math.sin(math.pi*(angle/180))*magnitude, -math.cos(math.pi*(angle/180))*magnitude)
 end
 
-function ball:kickTowardsGoal(goal, m)
+function ball:kickTowardsGoal(player, goal, m)
    if love.timer.getTime() < self.kicked + self.kickInterval then return end
+
    self.kicked = love.timer.getTime()
+   self.posession = player.team
+
    gx, gy = goal:getCenter()
    sx, sy = self.body:getPosition()
    dx = gx - sx

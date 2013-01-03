@@ -1,7 +1,7 @@
 class "player" {
    speedLimit = 130,
    kickDistance = 17,
-   kickMagnitude = 100
+   kickMagnitude = 20
 	       }
 
 function player:createPlayer(team, x, y)
@@ -60,14 +60,14 @@ end
 function player:kick(angle, magnitude)
    if magnitude > self.kickMagnitude then magnitude = self.kickMagnitude end
    if(self:getDistanceFrom(objects.ball) <= self.kickDistance) then
-      objects.ball:kick(angle, magnitude)
+      objects.ball:kick(self, angle, magnitude)
    end
 end
 
 function player:kickTowardsGoal(m)
    if m > self.kickMagnitude then m = self.kickMagnitude end
    if self:getDistanceFrom(objects.ball) <= self.kickDistance then
-      objects.ball:kickTowardsGoal(self.team.otherTeam.goal, m)
+      objects.ball:kickTowardsGoal(self, self.team.otherTeam.goal, m)
    end
 end
 
