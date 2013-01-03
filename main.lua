@@ -55,7 +55,7 @@ function love.draw()
    love.graphics.draw(bg)
    objects.ball:draw()
 
-   for k, team in pairs(teams) do
+   for k, team in ipairs(teams) do
       team.goal:draw()
       for k, player in ipairs(team) do
 	 player:draw()
@@ -65,6 +65,7 @@ function love.draw()
 end
 
 function loadTeam(team)
+   if numTeams == 2 then return end
    numTeams = numTeams + 1
 
    -- load player classes
@@ -74,9 +75,9 @@ function loadTeam(team)
    for k, file in ipairs(files) do
       assert(loadstring('require "'..teamDir.."/"..string.sub(file,1,-5)..'"'))()
    end
-   for i=1,(table.getn(files)-1) do
+   for i=1,1 do
       y = math.random(height)
-      x = (numTeams == 1) and math.random(width / 2) or math.random(width / 2) + width / 2
+      x = (numTeams == 1) and math.random(width / 2) + width / 2 or math.random(width / 2)
 	  z = teams[team]
       teams[team][i] = assert(loadstring("return "..team..i..":new(z, x, y)")())
    end
@@ -88,19 +89,25 @@ function loadTeam(team)
       x, y, r = 40, 280, 0
    end
    teams[team].goal = goal:new(world, x, y, r, objects.ball, numTeams, teams[team][1].color, teams)
+
+   -- set up references
    teams[team].number = numTeams
+   teams[numTeams] = teams[team]
+   if (numTeams == 2) then
+      teams[1].otherTeam = teams[2]
+      teams[2].otherTeam = teams[1]
+   end
 end
 
 
 function resetPlayers()
-   for k, team in pairs(teams) do
+   for k, team in ipairs(teams) do
       for k, player in ipairs(team) do
 	 y = math.random(height)
-	 x = (player.team.number == 1) and math.random(width / 2) or math.random(width / 2) + width / 2
+	 x = (player.team.number == 1) and math.random(width / 2) + width / 2 or math.random(width / 2)
 	 player.body:setPosition(x, y)
 	 player.body:setLinearVelocity(0,0)
 	 if(player.reset) then player:reset() end
       end
    end
-
 end

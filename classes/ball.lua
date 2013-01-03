@@ -24,6 +24,15 @@ function ball:kick(angle, magnitude)
    self.body:applyForce(math.sin(math.pi*(angle/180))*magnitude*10, -math.cos(math.pi*(angle/180))*magnitude*10)
 end
 
+function ball:kickTowardsGoal(goal, m)
+   gx, gy = goal:getCenter()
+   sx, sy = self.body:getPosition()
+   dx = gx - sx
+   dy = gy - sy
+   ratio = m / math.sqrt(dx*dx+dy*dy)
+   self.body:applyForce(dx*ratio, dy*ratio)
+end
+
 function ball:draw()
    love.graphics.setColor(255,255,255,255)
    love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(),  1, 1, self.image:getWidth()/2, self.image:getHeight()/2)

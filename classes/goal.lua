@@ -30,6 +30,10 @@ function goal:init(world, x, y, rotation, ball, teamNum, scoreColor)
    self.body:setAngle(math.rad(rotation))
 end
 
+function goal:getCenter()
+   return self.body:getPosition()
+end
+
 function goal:scored()
    self.ball.body:setX(500)
    self.ball.body:setY(280)

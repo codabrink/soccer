@@ -10,6 +10,6 @@ end
 function coda1:update(dt)
       self:moveTowardsBall(1)
       if self:getDistanceFrom(objects.ball) < 30 then
-	 objects.ball:kick(90,130)
+	 objects.ball:kickTowardsGoal(self.team.otherTeam.goal, 130)
       end
 end
