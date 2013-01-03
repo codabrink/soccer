@@ -14,8 +14,6 @@ function love.load()
   objects.goals = {}
   objects.goals.goal1 = goal:new(world, 40, 280, 0, objects.ball)
   objects.goals.goal2 = goal:new(world, 960, 280, 180, objects.ball)
-  objects.goals.goal3 = goal:new(world, 500, 60, 90, objects.ball)
-  objects.goals.goal4 = goal:new(world, 500, 500, 270, objects.ball)
 
    loadTeam("coda")
 
