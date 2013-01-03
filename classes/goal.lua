@@ -3,11 +3,19 @@ class "goal" {}
 
 local image=love.graphics.newImage("res/goal.png")
 local font=love.graphics.newFont(14);
+local scoreFont=love.graphics.newFont(16);
 
-function goal:init(world, x, y, rotation, ball)
+function goal:init(world, x, y, rotation, ball, team, scoreColor)
 	self.ready=true
 	self.ball=ball
 	self.timeLeft=0
+	self.score=0
+	self.team=team
+	self.color={}
+	self.color.r=scoreColor[1]
+	self.color.g=scoreColor[2]
+	self.color.b=scoreColor[3]
+	self.color.a=scoreColor[4]
    self.body = love.physics.newBody(world, x, y)
    --0,0, 0,80, 80,28, 80,27, 1,80, 1,1, 28,1, 28,0)
    self.shape1 = love.physics.newEdgeShape(-14,-40, -14,40)
@@ -51,6 +59,9 @@ function goal:draw()
 	love.graphics.setColor(255,100,100,255)
 	love.graphics.setFont(font)
 	if(self.drawScore) then love.graphics.print("GOAL!", self.body:getX(), self.body:getY()) end
+	love.graphics.setFont(scoreFont)
+	love.graphics.setColor(self.color.r,self.color.g,self.color.b,self.color.a)
+	love.graphics.print(self.score, 20, 15*self.team)
 	--love.graphics.line(self.body:getWorldPoints(self.shape1:getPoints()))
 	--love.graphics.line(self.body:getWorldPoints(self.shape2:getPoints()))
 	--love.graphics.line(self.body:getWorldPoints(self.shape3:getPoints()))

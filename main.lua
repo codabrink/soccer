@@ -12,8 +12,8 @@ function love.load()
   world = love.physics.newWorld(0, 0, true)
   objects.ball = ball:new(world, 500, 280, ballImage)
   objects.goals = {}
-  objects.goals.goal1 = goal:new(world, 40, 280, 0, objects.ball)
-  objects.goals.goal2 = goal:new(world, 960, 280, 180, objects.ball)
+  objects.goals.goal1 = goal:new(world, 40, 280, 0, objects.ball, 1, {255, 50, 50, 255})
+  objects.goals.goal2 = goal:new(world, 960, 280, 180, objects.ball, 2, {50, 50, 255, 255})
 
    loadTeam("coda")
 
