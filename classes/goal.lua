@@ -47,8 +47,9 @@ function goal:checkBall(dt)
 	lowerX, lowerY=self.body:getWorldPoint(-14, -40)
 	if(upperX<lowerX) then upperX,lowerX=lowerX,upperX end
 	if(upperY<lowerY) then upperY,lowerY=lowerY,upperY end
-	if(ballX>lowerX and ballX<upperX and ballY>lowerY and ballY<upperY) then
+	if(ballX>lowerX and ballX<upperX and ballY>lowerY and ballY<upperY and self.ready) then
 		self.ready=false
+		self.score=self.score+1
 		self.timeLeft=3
 	end
 end
@@ -59,9 +60,13 @@ function goal:draw()
 	love.graphics.setColor(255,100,100,255)
 	love.graphics.setFont(font)
 	if(self.drawScore) then love.graphics.print("GOAL!", self.body:getX(), self.body:getY()) end
+	
+	--draw score in upper left corner
+	love.graphics.setColor(40, 40, 40, 255)
+	love.graphics.rectangle('fill', 0, 20*self.team-20, 50, 20)
 	love.graphics.setFont(scoreFont)
 	love.graphics.setColor(self.color.r,self.color.g,self.color.b,self.color.a)
-	love.graphics.print(self.score, 20, 15*self.team)
+	love.graphics.print(self.score, 20, 20*self.team-20)
 	--love.graphics.line(self.body:getWorldPoints(self.shape1:getPoints()))
 	--love.graphics.line(self.body:getWorldPoints(self.shape2:getPoints()))
 	--love.graphics.line(self.body:getWorldPoints(self.shape3:getPoints()))
