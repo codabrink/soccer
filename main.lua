@@ -12,10 +12,9 @@ function love.load()
   world = love.physics.newWorld(0, 0, true)
   objects.ball = ball:new(world, 500, 280, ballImage)
   objects.goals = {}
-  objects.goals.goal1 = goal:new(world, 40, 280, 0, objects.ball, 1, {255, 50, 50, 255})
-  objects.goals.goal2 = goal:new(world, 960, 280, 180, objects.ball, 2, {50, 50, 255, 255})
 
    loadTeam("coda")
+   loadTeam("mike")
 
    love.graphics.setMode(1000, 560, false, true, 0)
 end
@@ -38,14 +37,11 @@ function love.update(dt)
    world:update(dt)
    objects.ball:update(dt)
    for k, team in pairs(teams) do
+	team.goal:update(dt)
       for k, player in ipairs(team) do
 	 player:update()
 	 player:govern()
       end
-   end
-   
-   for k, goal in pairs(objects.goals) do
-      goal:update(dt)
    end
 end
 
@@ -56,14 +52,11 @@ function love.draw()
    objects.ball:draw()
 
    for k, team in pairs(teams) do
+	team.goal:draw()
       for k, player in ipairs(team) do
 	 player:draw()
       end
    end
-   for k, goal in pairs(objects.goals) do
-      goal:draw()
-   end
-
    love.graphics.print(printme, 100, 100)
 end
 
@@ -74,7 +67,10 @@ function loadTeam(team)
    for k, file in ipairs(files) do
       assert(loadstring('require "'..teamDir.."/"..string.sub(file,1,-5)..'"'))()
    end
-   for i=1,5 do
+   for i=1,(table.getn(files)-1) do
       teams[team][i] = assert(loadstring("return "..team..i..":new(teams[team])")())
    end
+   if(table.getn(teams)==1) then x,y,r=960,280,180
+   else x,y,r=40,280,0 end
+	teams[team].goal = goal:new(world, 40, 280, 0, objects.ball, 1, {255, 50, 50, 255})
 end
