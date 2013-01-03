@@ -1,7 +1,7 @@
 require "lib/class"
 class "ball" {
-   kickInterval = 3,
-   kicked = 0
+   kickInterval = 3, -- time in seconds of how often the ball can be kicked (considering making per player)
+   kicked = 0 -- time that the ball was last kicked
 	     }
 
 function ball:init(world, x, y)
@@ -9,7 +9,7 @@ function ball:init(world, x, y)
    self.shape = love.physics.newCircleShape(4) --the ball is 40 cm
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
    self.fixture:setRestitution(0.9)
-   self.body:setLinearDamping(.5)
+   self.body:setLinearDamping(.7)
    self.body:setAngularDamping(1.5)
    self.body:setMass(.05)
 
