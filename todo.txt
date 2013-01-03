@@ -1,3 +1,0 @@
-ball out of bounds
-limits kicks per second?
-random placement of players
