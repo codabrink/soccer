@@ -8,6 +8,7 @@ function player:createPlayer(team, x, y)
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
    self.body:setMass(.6)
    self.team = team
+   if(self.team==nil) then printme="HELP!" end
 end
 
 function player:draw()

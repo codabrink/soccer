@@ -77,7 +77,8 @@ function loadTeam(team)
    for i=1,(table.getn(files)-1) do
       y = math.random(height)
       x = (numTeams == 1) and math.random(width / 2) or math.random(width / 2) + width / 2
-      teams[team][i] = assert(loadstring("return "..team..i..":new(teams[team], x, y)")())
+	  z = teams[team]
+      teams[team][i] = assert(loadstring("return "..team..i..":new(z, x, y)")())
    end
 
    -- goal things
