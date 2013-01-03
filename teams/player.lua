@@ -54,6 +54,13 @@ function player:govern(dt)
    end
 end
 
+function player:kick(angle, magnitude)
+	if(magnitude > 200) then magnitude=200 end
+	if(self:getDistanceFrom(objects.ball) <= 30) then
+		objects.ball:kick(angle, magnitude)
+	end
+end
+
 -- misc functions
 
 function samePolarity(a,b)
