@@ -74,7 +74,7 @@ function loadTeam(team)
    for k, file in ipairs(files) do
       assert(loadstring('require "'..teamDir.."/"..string.sub(file,1,-5)..'"'))()
    end
-   for i=1,2 do
+   for i=1,5 do
       teams[team][i] = assert(loadstring("return "..team..i..":new(teams[team])")())
    end
 end

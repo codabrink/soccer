@@ -18,6 +18,11 @@ end
 function player:getDiffs()
    return objects.ball:getX() - self.body:getX(), objects.ball:getY() - self.body:getY()
 end
+function player:getDistanceFrom(o)
+   dx = math.abs(o:getX() - self.body:getX())
+   dy = math.abs(o:getY() - self.body:getY())
+   return math.sqrt(dx*dx+dy*dy)
+end
 
 function player:moveTowardsBall(m)
    if m > 1 or m < 0 then return end
@@ -36,7 +41,7 @@ end
 function player:moveTowardsAngle(a,m)
    if m > 1 or m < 0 then return end
    a = (a == 0) and 360 or a
-   self.body:applyForce(math.sin(math.pi*(angle/180))*m*10, -math.cos(math.pi*(angle/180))*m*10)
+   self.body:applyForce(math.sin(math.pi*(angle/180))*m*self.speedLimit, -math.cos(math.pi*(angle/180))*m*self.speedLimit)
 end
 
 function player:govern(dt)
