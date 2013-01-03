@@ -1,5 +1,4 @@
 require "lib/class"
-require "teams/player"
 require "teams/mike/pmike"
 class "mike1" : extends(pmike)
 
