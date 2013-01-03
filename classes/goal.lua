@@ -67,7 +67,6 @@ function goal:draw()
 	love.graphics.setFont(scoreFont)
 	love.graphics.setColor(self.color.r,self.color.g,self.color.b,self.color.a)
 	love.graphics.print(self.score, 20, 20*self.team-20)
-	--love.graphics.line(self.body:getWorldPoints(self.shape1:getPoints()))
-	--love.graphics.line(self.body:getWorldPoints(self.shape2:getPoints()))
-	--love.graphics.line(self.body:getWorldPoints(self.shape3:getPoints()))
+
+	love.graphics.line(self.body:getWorldPoints(self.shape1:getPoints()))
 end
