@@ -1,6 +1,8 @@
 class "player" {
-   speedLimit = 130
-}
+   speedLimit = 130,
+   kickDistance = 30,
+   kickMagnitude = 200
+	       }
 
 function player:createPlayer(team, x, y)
    self.body = love.physics.newBody(world, x, y, "dynamic")
@@ -56,10 +58,17 @@ function player:govern(dt)
 end
 
 function player:kick(angle, magnitude)
-	if(magnitude > 200) then magnitude=200 end
-	if(self:getDistanceFrom(objects.ball) <= 30) then
-		objects.ball:kick(angle, magnitude)
-	end
+   if magnitude > self.kickMagnitude then magnitude = self.kickMagnitude end
+   if(self:getDistanceFrom(objects.ball) <= self.kickDistance) then
+      objects.ball:kick(angle, magnitude)
+   end
+end
+
+function player:kickTowardsGoal(m)
+   if m > self.kickMagnitude then m = self.kickMagnitude end
+   if self:getDistanceFrom(objects.ball) <= self.kickDistance then
+      objects.ball:kickTowardsGoal(self.team.otherTeam.goal, m)
+   end
 end
 
 -- misc functions
