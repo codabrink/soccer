@@ -23,32 +23,30 @@ end
 function love.keypressed(key)
    if key == "q" then
       love.event.push("quit")
+   elseif key == "right" then
+      objects.ball:kick(90, 75)   
+   elseif key == "left" then
+      objects.ball:kick(270, 75)
+   elseif key == "up" then
+      objects.ball:kick(0, 75)
+   elseif key == "down" then
+      objects.ball:kick(180, 75)
    end
 end
 
 function love.update(dt)
-	world:update(dt)
-	objects.ball:update(dt)
-	for k, goal in pairs(objects.goals) do
-	   goal:update(dt)
-	end
-	
-	for k, team in pairs(teams) do
-	   for k, player in ipairs(team) do
-	      player:update()
-	      player:govern()
-	   end
-	end
-
-	if love.keyboard.isDown("right") then
-		objects.ball:kick(90, 75)
-	elseif love.keyboard.isDown("left") then
-		objects.ball:kick(270, 75)
-	elseif love.keyboard.isDown("down") then
-		objects.ball:kick(180, 75)
-	elseif love.keyboard.isDown("up") then
-		objects.ball:kick(0, 75)
-	end
+   world:update(dt)
+   objects.ball:update(dt)
+   for k, team in pairs(teams) do
+      for k, player in ipairs(team) do
+	 player:update()
+	 player:govern()
+      end
+   end
+   
+   for k, goal in pairs(objects.goals) do
+      goal:update(dt)
+   end
 end
 
 function love.draw()

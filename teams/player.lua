@@ -1,5 +1,5 @@
 class "player" {
-   speedLimit = 110
+   speedLimit = 130
 }
 
 function player:createPlayer(team, x, y)
@@ -20,15 +20,21 @@ function player:getDiffs()
 end
 
 function player:moveTowardsBall(m)
+   if m > 1 or m < 0 then return end
    dx, dy = self:getDiffs()
-   self.body:applyForce(dx, dy)
+   ratio = ((self.speedLimit * m) / math.sqrt(dx*dx+dy*dy))
+   self.body:applyForce(dx*ratio, dy*ratio)
 end
 
 function player:moveTowardsLocation(x,y,m)
-
+   if m > 1 or m < 0 then return end
+   dx = x - self.body:getX()
+   dy = y - self.body:getY()
+   ratio = ((self.speedLimit * m) / math.sqrt(dx*dx+dy*dy))
 end
 
 function player:moveTowardsAngle(a,m)
+   if m > 1 or m < 0 then return end
    a = (a == 0) and 360 or a
    self.body:applyForce(math.sin(math.pi*(angle/180))*m*10, -math.cos(math.pi*(angle/180))*m*10)
 end
@@ -42,7 +48,6 @@ function player:govern(dt)
       self.body:setLinearVelocity(x*reduce, y*reduce)
    end
 end
-
 
 -- misc functions
 
