@@ -74,5 +74,5 @@ function loadTeam(team)
    end
    if(numTeams==1) then x,y,r=960,280,180
    else x,y,r=40,280,0 end
-	teams[team].goal = goal:new(world, x, y, r, objects.ball, numTeams, teams[team][1].color)
+	teams[team].goal = goal:new(world, x, y, r, objects.ball, numTeams, teams[team][1].color, teams)
 end

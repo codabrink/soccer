@@ -5,12 +5,12 @@ local image=love.graphics.newImage("res/goal.png")
 local font=love.graphics.newFont(14);
 local scoreFont=love.graphics.newFont(16);
 
-function goal:init(world, x, y, rotation, ball, team, scoreColor)
+function goal:init(world, x, y, rotation, ball, teamNum, scoreColor)
 	self.ready=true
 	self.ball=ball
 	self.timeLeft=0
 	self.score=0
-	self.team=team
+	self.teamNum=teamNum
 	self.color={}
 	self.color.r=scoreColor[1]
 	self.color.g=scoreColor[2]
@@ -28,6 +28,20 @@ function goal:init(world, x, y, rotation, ball, team, scoreColor)
    if(image) then self.image=image end
    
    self.body:setAngle(math.rad(rotation))
+end
+
+function goal:scored()
+	self.ball.body:setX(500)
+	self.ball.body:setY(280)
+	self.ball.body:setLinearVelocity(0,0)
+	for k, team in pairs(teams) do
+		for k, player in ipairs(team) do
+			player.body:setX(110)
+			player.body:setY(110)
+			player.body:setLinearVelocity(0,0)
+			if(player.reset) then player:reset() end
+		end
+	end
 end
 
 function goal:update(dt)
@@ -51,6 +65,7 @@ function goal:checkBall(dt)
 		self.ready=false
 		self.score=self.score+1
 		self.timeLeft=3
+		self:scored()
 	end
 end
 
@@ -63,10 +78,10 @@ function goal:draw()
 	
 	--draw score in upper left corner
 	love.graphics.setColor(40, 40, 40, 255)
-	love.graphics.rectangle('fill', 0, 20*self.team-20, 50, 20)
+	love.graphics.rectangle('fill', 0, 20*self.teamNum-20, 50, 20)
 	love.graphics.setFont(scoreFont)
 	love.graphics.setColor(self.color.r,self.color.g,self.color.b,self.color.a)
-	love.graphics.print(self.score, 20, 20*self.team-20)
+	love.graphics.print(self.score, 20, 20*self.teamNum-20)
 
 	love.graphics.line(self.body:getWorldPoints(self.shape1:getPoints()))
 end
