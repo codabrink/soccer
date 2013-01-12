@@ -15,7 +15,7 @@ printme = ''
 function love.load()
    love.physics.setMeter(10)
    world = love.physics.newWorld(0, 0, true)
-   objects.ball = ball:new(world, width / 2, height / 2, ballImage)
+   objects.ball = ball:new(world, width / 2, height / 2)
    objects.goals = {}
 
    loadTeam("coda")
