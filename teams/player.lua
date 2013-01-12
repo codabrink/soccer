@@ -1,7 +1,7 @@
 class "player" {
-   speedLimit = 130,
+   speedLimit = 100,
    kickDistance = 17,
-   kickMagnitude = 20
+   kickMagnitude = 15
 	       }
 
 function player:createPlayer(team, x, y)
@@ -39,6 +39,7 @@ function player:moveTowardsLocation(x,y,m)
    dx = x - self.body:getX()
    dy = y - self.body:getY()
    ratio = ((self.speedLimit * m) / math.sqrt(dx*dx+dy*dy))
+   self.body:applyForce(dx*ratio, dy*ratio)
 end
 
 function player:moveTowardsAngle(a,m)

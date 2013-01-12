@@ -9,7 +9,7 @@ function ball:init(world, x, y)
    self.shape = love.physics.newCircleShape(4) --the ball is 40 cm
    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
    self.fixture:setRestitution(0.9)
-   self.body:setLinearDamping(.7)
+   self.body:setLinearDamping(.8)
    self.body:setAngularDamping(1.5)
    self.body:setMass(.05)
 
@@ -45,12 +45,16 @@ function ball:kickTowardsGoal(player, goal, m)
    self.kicked = love.timer.getTime()
    self.posession = player.team
 
-   gx, gy = goal:getCenter()
+   gx, gy = goal:getPos()
    sx, sy = self.body:getPosition()
    dx = gx - sx
    dy = gy - sy
    ratio = m / math.sqrt(dx*dx+dy*dy)
    self.body:applyLinearImpulse(dx*ratio, dy*ratio)
+end
+
+function ball:getLinearVelocity()
+	return self.body:getLinearVelocity()
 end
 
 function ball:draw()

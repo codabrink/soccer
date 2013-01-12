@@ -7,9 +7,9 @@ function mike2:init(team,x,y)
 end
 
 function mike2:update(dt)
-	self:moveTowardsBall(1)
-	if self:getDistanceFrom(objects.ball) < 30 then
-		self:kickTowardsGoal(20)
+	--self:moveTowardsBall(1)
+	if self:getDistanceFrom(objects.ball) < 17 then
+		self:kickWithAngleCorrection(20, self)
 	end
 end
 

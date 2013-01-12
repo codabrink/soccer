@@ -7,9 +7,10 @@ function mike1:init(team,x,y)
 end
 
 function mike1:update(dt)
-   self:moveTowardsBall(1)
-	if self:getDistanceFrom(objects.ball) < 30 then
-		self:kickTowardsGoal(20)
+	goalX, goalY = self.team.otherTeam.goal:getPos()
+	self:getInPositionToKick(self, goalX, goalY)
+	if self:getDistanceFrom(objects.ball) < 17 then
+		self:kickTowardsGoal(15)
 	end
 end
 

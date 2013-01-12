@@ -11,6 +11,8 @@ width = 1000
 height = 560
 
 printme = ''
+testX = 0
+testY = 0
 
 function love.load()
    love.physics.setMeter(10)
@@ -39,7 +41,7 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
-   printme = love.timer.getTime()
+   --printme = love.timer.getTime()
    world:update(dt)
    objects.ball:update(dt)
    for k, team in pairs(teams) do
@@ -63,7 +65,12 @@ function love.draw()
 	 player:draw()
       end
    end
+   love.graphics.setColor(255,255,255,255)
    love.graphics.print(printme, 100, 100)
+   if(testX and testY) then
+	love.graphics.line(testX-5, testY, testX+5, testY)
+	love.graphics.line(testX, testY-5, testX, testY+5)
+   end
 end
 
 function loadTeam(team)
