@@ -21,6 +21,7 @@ end
 function player:getDiffs()
     return objects.ball:getX() - self.body:getX(), objects.ball:getY() - self.body:getY()
 end
+
 function player:getDistanceFrom(o)
     dx = math.abs(o:getX() - self.body:getX())
     dy = math.abs(o:getY() - self.body:getY())
@@ -68,7 +69,7 @@ end
 function player:kickTowardsGoal(m)
     if m > self.kickMagnitude then m = self.kickMagnitude end
     if self:getDistanceFrom(objects.ball) <= self.kickDistance then
-        objects.ball:kickTowardsGoal(self, self.team.otherTeam.goal, m)
+        objects.ball:kickTowardsGoal(self, self:otherTeam().goal, m)
     end
 end
 

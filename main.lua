@@ -79,6 +79,7 @@ function loadTeam(team)
 
     -- load player classes
     teams[team] = {}
+    teams[team].name = team
     teamDir = "teams/"..team
     files = love.filesystem.enumerate(teamDir)
     for k, file in ipairs(files) do

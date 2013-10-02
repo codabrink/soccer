@@ -81,10 +81,14 @@ function goal:draw()
 
    --draw score in upper left corner
    love.graphics.setColor(40, 40, 40, 255)
-   love.graphics.rectangle('fill', 0, 20*self.teamNum-20, 50, 20)
+   love.graphics.rectangle('fill', 0, 20*self.teamNum-20, 110, 20)
    love.graphics.setFont(scoreFont)
+   
+   love.graphics.setColor(255,255,255,255)
+   love.graphics.print(self.teams[self.teamNum].name, 20, 20*(self.teamNum-1))
+   
    love.graphics.setColor(self.color.r,self.color.g,self.color.b,self.color.a)
-   love.graphics.print(self.score, 20, 20*self.teamNum-20)
+   love.graphics.print(self.score, 80, 20*(self.teamNum-1))
 
    love.graphics.line(self.body:getWorldPoints(self.shape1:getPoints()))
 end
