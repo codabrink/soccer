@@ -7,3 +7,9 @@ function clone(t)
    end
    return new
 end
+
+function tsize(t)
+   count = 0
+   for _ in pairs(t) do count = count + 1 end
+   return count
+end

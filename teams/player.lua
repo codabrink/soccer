@@ -72,6 +72,10 @@ function player:kickTowardsGoal(m)
    end
 end
 
+function player:otherTeam()
+   return self.team.otherTeam
+end
+
 -- misc functions
 
 function samePolarity(a,b)
