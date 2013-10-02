@@ -27,3 +27,7 @@ function pcoda:closePlayers()
    end
    return distances
 end
+
+function pcoda:isBallBehind()
+    
+end
