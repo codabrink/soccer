@@ -2,7 +2,7 @@ class "player" {
     speedLimit = 100,
     kickDistance = 17,
     kickMagnitude = 15
-	       }
+}
 
 function player:createPlayer(team, x, y)
     self.body = love.physics.newBody(world, x, y, "dynamic")
