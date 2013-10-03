@@ -11,8 +11,7 @@ width = 1000
 height = 560
 
 printme = ''
-testX = 0
-testY = 0
+debugPoints = {}
 
 function love.load()
     love.physics.setMeter(10)
@@ -67,9 +66,16 @@ function love.draw()
     end
     love.graphics.setColor(255,255,255,255)
     love.graphics.print(printme, 100, 100)
-    if(testX and testY) then
-	love.graphics.line(testX-5, testY, testX+5, testY)
-	love.graphics.line(testX, testY-5, testX, testY+5)
+    for i, points in ipairs(debugPoints) do
+        love.graphics.setColor(
+            points.R and points.R or 255,
+            points.G and points.G or 255,
+            points.B and points.B or 255,
+            255
+        )
+        love.graphics.line(points.X-5, points.Y, points.X+5, points.Y)
+        love.graphics.line(points.X, points.Y-5, points.X, points.Y+5)
+        debugPoints[i] = nil
     end
 end
 
@@ -122,4 +128,14 @@ function resetPlayers()
 
     objects.ball.body:setPosition(width / 2, height / 2)
     objects.ball.body:setLinearVelocity(0,0)
+end
+
+function debug(pX, pY, cR, cG, cB)
+    table.insert(debugPoints, {
+        ["X"] = pX,
+        ["Y"] = pY,
+        ["R"] = cR,
+        ["G"] = cG,
+        ["B"] = cB
+    })
 end
